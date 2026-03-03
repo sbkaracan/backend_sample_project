@@ -2,12 +2,12 @@ from pydantic import BaseModel, Field, EmailStr, field_validator
 from typing import List, Optional
 from datetime import datetime
 
-# User schemas
+
 class UserCreate(BaseModel):
     email: EmailStr
     username: str = Field(..., min_length=3, max_length=50)
-    password: str = Field(..., min_length=6, max_length=50)  # Add max length
-    
+    password: str = Field(..., min_length=6, max_length=50)
+
     @field_validator('password')
     @classmethod
     def validate_password(cls, v):
@@ -15,28 +15,32 @@ class UserCreate(BaseModel):
             raise ValueError('Password too long (max 72 bytes)')
         return v
 
+
 class User(BaseModel):
     id: int
     email: str
     username: str
     created_at: datetime
-    
+
     class Config:
         from_attributes = True
+
 
 class Token(BaseModel):
     access_token: str
     token_type: str
 
+
 class TokenData(BaseModel):
     username: Optional[str] = None
 
-# Recipe schemas (unchanged)
+
 class RecipeCreate(BaseModel):
     title: str = Field(..., min_length=1, max_length=200)
-    ingredients: List[str] = Field(..., min_items=1)
+    ingredients: List[str] = Field(..., min_length=1)
     instructions: str = Field(..., min_length=10)
     prep_time_minutes: int = Field(..., gt=0)
+
 
 class Recipe(BaseModel):
     id: int
@@ -47,6 +51,6 @@ class Recipe(BaseModel):
     created_at: datetime
     rating: Optional[float] = None
     owner_id: int
-    
+
     class Config:
         from_attributes = True
