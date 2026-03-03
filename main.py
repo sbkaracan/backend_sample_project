@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException, Depends, status
 from fastapi.security import OAuth2PasswordRequestForm
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import List
 from datetime import timedelta
@@ -8,9 +9,9 @@ from database import engine, get_db, Base
 from models import RecipeModel, UserModel
 from schemas import Recipe, RecipeCreate, User, UserCreate, Token
 from auth import (
-    get_password_hash, 
-    verify_password, 
-    create_access_token, 
+    get_password_hash,
+    verify_password,
+    create_access_token,
     get_current_user,
     ACCESS_TOKEN_EXPIRE_MINUTES
 )
@@ -19,6 +20,14 @@ from auth import (
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Recipe API", version="3.0.0")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def read_root():
