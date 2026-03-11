@@ -1,4 +1,5 @@
 # RecipeHub — Backend Learning Project
+<img width="1898" height="870" alt="recipe-hub" src="https://github.com/user-attachments/assets/4db2c488-addf-4a5e-b963-c74436bfce30" />
 
 A recipe management platform built to learn the fundamentals of backend development. Users can register, log in, and manage their personal recipe collection through a REST API.
 
