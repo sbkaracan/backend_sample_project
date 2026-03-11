@@ -56,7 +56,7 @@ export default function Login({ onLogin }) {
             <input
               name="password"
               type="password"
-              placeholder="••••••••"
+              placeholder="Enter your password"
               value={form.password}
               onChange={handleChange}
               required
@@ -68,12 +68,17 @@ export default function Login({ onLogin }) {
             className="btn-primary auth-submit"
             disabled={loading}
           >
-            {loading ? 'Signing in…' : 'Sign In'}
+            {loading ? (
+              <>
+                <span style={{ width: 16, height: 16, border: '2px solid rgba(255,255,255,0.35)', borderTopColor: '#fff', borderRadius: '50%', display: 'inline-block', animation: 'spin 0.7s linear infinite' }} />
+                Signing in...
+              </>
+            ) : 'Sign In'}
           </button>
         </form>
 
         <p className="auth-switch">
-          Don't have an account?
+          Don&apos;t have an account?
           <Link to="/register">Create one</Link>
         </p>
       </div>

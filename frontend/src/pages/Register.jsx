@@ -16,7 +16,6 @@ export default function Register({ onLogin }) {
     setLoading(true);
     try {
       await api.register(form.email, form.username, form.password);
-      // Auto-login after registration
       const tokenData = await api.login(form.username, form.password);
       localStorage.setItem('token', tokenData.access_token);
       const userData = await api.getMe();
@@ -34,7 +33,7 @@ export default function Register({ onLogin }) {
         <div className="auth-logo">
           <div className="icon">🍳</div>
           <h1>RecipeHub</h1>
-          <p>Create your account</p>
+          <p>Create your free account</p>
         </div>
 
         {error && <div className="form-error">{error}</div>}
@@ -72,7 +71,7 @@ export default function Register({ onLogin }) {
             <input
               name="password"
               type="password"
-              placeholder="at least 6 characters"
+              placeholder="At least 6 characters"
               value={form.password}
               onChange={handleChange}
               required
@@ -85,7 +84,12 @@ export default function Register({ onLogin }) {
             className="btn-primary auth-submit"
             disabled={loading}
           >
-            {loading ? 'Creating account…' : 'Create Account'}
+            {loading ? (
+              <>
+                <span style={{ width: 16, height: 16, border: '2px solid rgba(255,255,255,0.35)', borderTopColor: '#fff', borderRadius: '50%', display: 'inline-block', animation: 'spin 0.7s linear infinite' }} />
+                Creating account...
+              </>
+            ) : 'Create Account'}
           </button>
         </form>
 

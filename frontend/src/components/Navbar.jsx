@@ -19,21 +19,21 @@ export default function Navbar({ user, onLogout }) {
         <div className="navbar-actions">
           {user ? (
             <>
-              <span className="navbar-user">Hi, {user.username}</span>
+              <span className="navbar-user">👤 {user.username}</span>
               <Link to="/recipes/new">
                 <button className="btn-accent navbar-btn">+ New Recipe</button>
               </Link>
-              <button className="btn-secondary navbar-btn" onClick={logout}>
-                Logout
+              <button className="btn-secondary navbar-btn" onClick={logout} style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', color: '#fff' }}>
+                Sign out
               </button>
             </>
           ) : (
             <>
               <Link to="/login">
-                <button className="btn-secondary navbar-btn">Login</button>
+                <button className="btn-secondary navbar-btn" style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', color: '#fff' }}>Login</button>
               </Link>
               <Link to="/register">
-                <button className="btn-primary navbar-btn">Register</button>
+                <button className="btn-accent navbar-btn">Register</button>
               </Link>
             </>
           )}
